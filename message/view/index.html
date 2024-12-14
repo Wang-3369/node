@@ -4,29 +4,126 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>首頁</title>
-    <link rel="stylesheet" href="../public/css/base.css">
-    <link rel="stylesheet" href="../public/css/layout.css">
-    <link rel="stylesheet" href="../public/css/form.css">
-    <link rel="stylesheet" href="../public/css/button.css">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/form.css">
+    <link rel="stylesheet" href="/css/button.css">
+    <link rel="stylesheet" href="/css/search.css">
+    <link rel="stylesheet" href="/css/ToolAndMap.css">
+    <style>
+        /* 左上角圓形樣式 */
+        #loginStatus {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: grey; /* 預設為灰色 */
+            z-index: 9999; /* 确保圆形显示在最上层 */
+        }
+        
+        /* 當用戶已登錄時，顯示綠色 */
+        .logged-in {
+            background-color: green !important; /* 使用 !important 确保覆盖其他样式 */
+        }
+    </style>
 </head>
 <body>
     <main class="container">
-        <section class="map-container">
-            <!-- 调整 iframe 的高度 -->
-            <iframe src="https://www.google.com/maps/embed?pb=your-map-link-here" style="width: 100%; height: 300px;" allowfullscreen></iframe>
-        </section>
+        <!-- 登入狀態圓形 -->
+        <div id="loginStatus"></div>
+
+        <!-- 折疊工具列 -->
+        <div class="collapsible-container">
+            <button class="collapsible-btn" id="toggleMenuBtn">≡</button>
+            <div class="collapsible-content" id="collapsibleMenu">
+                <a href="/login" class="btn">登入頁面</a>
+                <a href="/register" class="btn">註冊頁面</a>
+                <a href="/docs/網路程式設計專題提案.pdf" class="btn" target="_blank">說明文件</a>
+                <!-- 登出按鈕 -->
+                <a href="#" class="btn" id="logoutBtn" style="display: none;">登出</a>
+            </div>
+        </div>
+
+        <!-- 查詢表單區域 -->
         <section class="form-container">
-            <div class="input-group">
-                <input type="text" id="teacher" placeholder="老師">
-                <input type="text" id="courseName" placeholder="課程名稱">
-                <input type="text" id="courseCode" placeholder="課程代碼">
-                <input type="text" id="courseTime" placeholder="課程時間">
-                <input type="text" id="department" placeholder="學系">
+            <form id="detailedSearchForm" class="search-form">
+                <div class="input-group">
+                    <input type="text" id="teacher" placeholder="老師">
+                    <input type="text" id="courseName" placeholder="課程名稱">
+                    <input type="text" id="courseCode" placeholder="課程代碼">
+                    <input type="text" id="courseTime" placeholder="課程時間">
+                    <input type="text" id="department" placeholder="學系">
+                </div>
+                <button type="submit" id="searchButton" class="btn">查詢</button>
+            </form>
+        </section>
+
+        <!-- 查詢結果區域 -->
+        <header class="header">
+            <h1>查詢結果</h1>
+        </header>
+        <section>
+            <div class="table-container">
+                <table id="resultsTable" class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>節數</th>
+                            <th>星期</th>
+                            <th>課程名稱</th>
+                            <th>課號</th>
+                            <th>開課單位</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- 查询结果会插入在这里 -->
+                    </tbody>
+                </table>
             </div>
         </section>
-        <section class="btn-container">
-            <a href="login.html" class="btn">登入頁面</a>
+
+        <!-- 地圖彈窗 -->
+        <div id="mapModal" class="modal">
+            <div class="modal-content">
+                <span class="close" id="closeMapBtn">&times;</span>
+                <iframe src="https://www.google.com/maps/embed?pb=your-map-link-here" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <!-- 顯示地圖的按鈕 -->
+        <section class="map-btn-container">
+            <button id="showMapBtn" class="btn">查看地圖</button>
         </section>
     </main>
+
+    <script src="/js/indexsearch.js"></script>
+    <script src="/js/map.js"></script>
+    <script src="/js/script.js"></script>
+    <script>
+        // 初始化登录状态
+        const loggedIn = localStorage.getItem('loggedIn') === 'true';
+        console.log('Logged In Status:', loggedIn);
+
+        // 依照登录状态修改左上角圆圈颜色
+        const loginStatusElement = document.getElementById('loginStatus');
+        const logoutBtn = document.getElementById('logoutBtn');
+        
+        if (loggedIn) {
+            console.log('User is logged in');
+            loginStatusElement.classList.add('logged-in');  // 添加类以更改颜色
+            logoutBtn.style.display = 'block';  // 显示登出按钮
+        } else {
+            console.log('User is not logged in');
+            loginStatusElement.classList.remove('logged-in');  // 移除登录状态样式
+            logoutBtn.style.display = 'none';  // 隐藏登出按钮
+        }
+
+        // 登出功能
+        logoutBtn.addEventListener('click', function() {
+            localStorage.removeItem('loggedIn');  // 清除登录状态
+            window.location.reload();  // 刷新页面，更新状态
+        });
+    </script>
 </body>
 </html>
