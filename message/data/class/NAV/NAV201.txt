@@ -1,0 +1,683 @@
+1|#||4|40863|updatePanel|AjaxPanel|
+                    <input type="hidden" name="ActivePageControl" id="ActivePageControl" />
+                    <input type="hidden" name="ColumnFilter" id="ColumnFilter" />
+                    <input type="hidden" name="SAYEAR" id="SAYEAR" />
+                    <input type="hidden" name="QUERY_TYPE" id="QUERY_TYPE" value="6" />
+                    <input type="hidden" name="QUERY_COND" id="QUERY_COND" />
+                    <input type="hidden" name="Q_AYEARSMS" id="Q_AYEARSMS" />
+                    <input type="hidden" name="hidLastTab" id="hidLastTab" />
+                    <input type="hidden" name="hdnSelectedTab" id="hdnSelectedTab" value="4" />
+                    <!-- 標題畫面起始 -->
+                    <!-- ※把功能名稱span部分貼過來 -->
+                    <div class="row no-gutters">
+                        <div class="col title_2">
+                            <i class="ri-function-fill"></i>
+                            <span ml="PL_TKE2211_課程課表查詢">TKE2211_課程課表查詢</span>
+                        </div>
+                        <div class="col-auto prog-icon">
+                            <!-- ※把查詢上方按鈕的"新增"按鈕改到這裡，class加btn-info -->
+                            
+                            <input type="submit" name="QCLEAR_BTN1" value="還原" id="QCLEAR_BTN1" class="btn btn-secondary" ml="CB_清除" value="清除" />
+                        </div>
+                    </div>
+                    <div class="hr hr-bottom hr-dashed"></div>
+                    <!-- 標題畫面結束 -->
+
+                    <!-- 查詢畫面開始 -->
+                    <div class="shadow-frame mb-4">
+                        <!-- 區域摺疊開闔功能 -->
+                        <!-- ※標題class="card-header"部分class必加" collapsible"，若預設內容開啟再加" collapsible-active"/預設內容闔上則改加" border-left-primary" -->
+                        <div class="card-header collapsible collapsible-active">
+                            <!-- 查詢"畫面"改為查詢"條件" -->
+                            <span ml="CL_查詢條件">查詢條件</span>
+                            <!-- 這是用span刻的icon，有開闔功能一定要加 -->
+                            <div class="collapsible-icon"><span></span><span></span></div>
+                        </div>
+                        <!-- ※內容class="card-body"部分class必加" collapsible-content"內容即預設為開啟/若預設內容要闔上則需另在此div元素加上屬性style="display: none;" -->
+                        <div class="card-body collapsible-content">
+                            <!-- 查詢畫面起始 -->
+                            <!-- ※把查詢畫面項目標題span部分貼過來 -->
+                            <!-- ※把查詢input項目貼過來，TextBox的class改成form-control，DropDownList的class改成form-select，Label的class改成form-label -->
+                            <!-- ※如果在同一欄要放一個日期區間，欄位的class則要多加multi-form-group date-period；內層要再包一層div class="form-control date-group"，並將原本的img標籤換成i標籤 -->
+                            <!-- ※如果在同一欄要兩個以上的表單元素，欄位的class也要多加multi-form-group -->
+                            <!-- ※最外層有包一個row -->
+                            <div class="row">
+                                <div class="col-xl-1 col-lg-2 col-md-3 col-form-label">
+                                    <span ml="PL_學年度">學年度</span>
+                                </div>
+                                <div class="col-xl-5 col-lg-4 col-md-9">
+                                    <span id="Q_AYEAR" class="form-label" DD="Z" CNAME="學年度">113</span>
+                                </div>
+                                <div class="col-xl-1 col-lg-2 col-md-3 col-form-label">
+                                    <span ml="PL_學期">學期</span>
+                                </div>
+                                <div class="col-xl-5 col-lg-4 col-md-9">
+                                    <span id="Q_SMS" class="form-label" DD="N" CNAME="學期">2</span>
+                                </div>
+                            </div>
+                            <div id="tabs">
+                                <ul>
+                                    <li><a href="#tabs-1" ml="單位查詢">單位查詢</a></li>
+                                    <li><a href="#tabs-2" ml="關鍵字查詢">關鍵字查詢</a></li>
+                                    <li><a href="#tabs-3" ml="開課老師查詢">開課老師查詢</a></li>
+                                    <li><a href="#tabs-4" ml="上課時間查詢">上課時間查詢</a></li>
+                                    <li><a href="#tabs-5" ml="教室排課查詢">教室排課查詢</a></li>
+                                    <li><a href="#tabs-6" ml="全英語課查詢">全英語課查詢</a></li>
+                                </ul>
+                                <div id='content'>
+                                    <div id="tabs-1">
+                                        <div class="row">
+                                            <div class="col-xl-1 col-lg-2 col-md-3 col-form-label">
+                                                <span ml="PL_部別">部別</span>
+                                            </div>
+                                            <div class="col-xl-5 col-lg-4 col-md-9">
+                                                <select name="Q_DEGREE_CODE" onchange="javascript:setTimeout(&#39;__doPostBack(\&#39;Q_DEGREE_CODE\&#39;,\&#39;\&#39;)&#39;, 0)" id="Q_DEGREE_CODE" class="form-select" DD="E" CNAME="部別代碼">
+	<option selected="selected" value="0">0-大學部</option>
+	<option value="1">1-碩士班</option>
+	<option value="2">2-博士班</option>
+	<option value="3">3-進修學士班</option>
+	<option value="4">4-碩士在職專班</option>
+	<option value="5">5-碩士學位班</option>
+	<option value="6">6-碩士推廣學分班</option>
+	<option value="7">7-學士推廣學分班</option>
+
+</select>
+                                            </div>
+                                            <div class="col-xl-1 col-lg-2 col-md-3 col-form-label">
+                                                <span ml="PL_開課系所">開課系所</span>
+                                            </div>
+                                            <div class="col-xl-5 col-lg-4 col-md-9">
+                                                <select name="Q_FACULTY_CODE" id="Q_FACULTY_CODE" class="form-select" DD="E" CNAME="系所代碼">
+	<option selected="selected" value="0700">0700-海運暨管理學院</option>
+	<option value="0701">0701-商船學系</option>
+	<option value="0703">0703-航運管理學系</option>
+	<option value="060E">060E-運輸與航海科學系航海組</option>
+	<option value="0603">0603-運輸技術系航海組</option>
+	<option value="0608">0608-運輸科學系</option>
+	<option value="0609">0609-運輸與航海科學系運輸組</option>
+	<option value="060A">060A-輪機工程學系能源應用組</option>
+	<option value="0606">0606-輪機工程學系四年制</option>
+	<option value="060B">060B-輪機工程學系輪機動力組</option>
+	<option value="060D">060D-輪機工程學系動力工程組</option>
+	<option value="060F">060F-輪機工程學系</option>
+	<option value="0707">0707-海洋經營管理學士學位學程</option>
+	<option value="0300">0300-生命科學院</option>
+	<option value="0302">0302-食品科學系</option>
+	<option value="030A">030A-食品科學系生物科技組</option>
+	<option value="0309">0309-食品科學系食品科學組</option>
+	<option value="0303">0303-水產養殖學系</option>
+	<option value="030B">030B-生命科學暨生物科技學系</option>
+	<option value="0308">0308-海洋生物科技學士學位學程</option>
+	<option value="0800">0800-海洋科學與資源學院</option>
+	<option value="0301">0301-環境生物與漁業科學學系</option>
+	<option value="0801">0801-海洋環境資訊系</option>
+	<option value="0500">0500-工學院</option>
+	<option value="0702">0702-機械與機電工程學系</option>
+	<option value="0501">0501-系統工程暨造船學系</option>
+	<option value="0502">0502-河海工程學系</option>
+	<option value="0506">0506-海洋工程科技學士學位學程</option>
+	<option value="0600">0600-電機資訊學院</option>
+	<option value="0503">0503-電機工程學系</option>
+	<option value="0507">0507-資訊工程學系</option>
+	<option value="060C">060C-通訊與導航工程學系</option>
+	<option value="0808">0808-光電與材料科技學士學位學程</option>
+	<option value="0809">0809-光電與材料科技學系</option>
+	<option value="090E">090E-海洋文創設計產業學士學位學程</option>
+	<option value="0900">0900-人文社會科學院</option>
+	<option value="1000">1000-海洋法律與政策學院（學）</option>
+	<option value="0706">0706-海洋觀光管理學士學位學程</option>
+	<option value="1001">1001-海洋法政學士學位學程</option>
+	<option value="090D">090D-大學部英語課程(原外語中心)</option>
+	<option value="090M">090M-共同教育中心博雅教育組</option>
+	<option value="090N">090N-華語中心</option>
+	<option value="090G">090G-共同教育中心</option>
+	<option value="090K">090K-共同教育中心語文教育組</option>
+	<option value="0901">0901-通識教育中心</option>
+	<option value="090B">090B-外語教學研究中心</option>
+	<option value="0905">0905-師資培育中心</option>
+	<option value="0904">0904-大學暑修班</option>
+	<option value="0908">0908-國外校際(學)</option>
+	<option value="0906">0906-抵免課程</option>
+	<option value="0907">0907-校際選課</option>
+	<option value="0903">0903-軍訓室</option>
+	<option value="0902">0902-體育室</option>
+	<option value="090S">090S-學務處</option>
+	<option value="0061">0061-體育室體育教學組</option>
+	<option value="9000">9000-未來學院</option>
+	<option value="0909">0909-校際選課（臺北聯合大學系統）</option>
+	<option value="0100">0100-行政單位</option>
+	<option value="0060">0060-體育室</option>
+	<option value="0910">0910-校際選課(博雅)</option>
+	<option value="0911">0911-校際選課(體育)</option>
+	<option value="0062">0062-體育室體育活動組</option>
+	<option value="0912">0912-校際選課(外文)</option>
+
+</select>
+                                            </div>
+                                            <div class="col-xl-1 col-lg-2 col-md-3 col-form-label">
+                                                <span ml="PL_年級">年級</span>
+                                            </div>
+                                            <div class="col-xl-5 col-lg-4 col-md-9">
+                                                <select name="Q_GRADE" id="Q_GRADE" class="form-select" DD="N" CNAME="年級">
+	<option selected="selected" value="">全部</option>
+	<option value="1">1</option>
+	<option value="2">2</option>
+	<option value="3">3</option>
+	<option value="4">4</option>
+	<option value="5">5</option>
+	<option value="6">6</option>
+	<option value="7">7</option>
+	<option value="8">8</option>
+	<option value="9">9</option>
+
+</select>
+                                            </div>
+                                            <div class="col-xl-1 col-lg-2 col-md-3 col-form-label">
+                                                <span ml="PL_班別">班別</span>
+                                            </div>
+                                            <div class="col-xl-5 col-lg-4 col-md-9">
+                                                <select name="Q_CLASSID" id="Q_CLASSID" class="form-select" DD="X" CNAME="班別">
+	<option selected="selected" value="">全部</option>
+	<option value="A">A</option>
+	<option value="B">B</option>
+	<option value="C">C</option>
+	<option value="D">D</option>
+	<option value="E">E</option>
+	<option value="F">F</option>
+	<option value="G">G</option>
+	<option value="H">H</option>
+	<option value="I">I</option>
+	<option value="J">J</option>
+	<option value="K">K</option>
+	<option value="L">L</option>
+	<option value="M">M</option>
+	<option value="N">N</option>
+	<option value="O">O</option>
+	<option value="P">P</option>
+	<option value="Q">Q</option>
+	<option value="R">R</option>
+	<option value="S">S</option>
+	<option value="T">T</option>
+	<option value="U">U</option>
+	<option value="V">V</option>
+	<option value="W">W</option>
+	<option value="X">X</option>
+	<option value="Y">Y</option>
+	<option value="Z">Z</option>
+	<option value="1">1</option>
+	<option value="2">2</option>
+	<option value="3">3</option>
+	<option value="4">4</option>
+	<option value="5">5</option>
+	<option value="6">6</option>
+	<option value="7">7</option>
+	<option value="8">8</option>
+	<option value="9">9</option>
+	<option value="AA">AA</option>
+	<option value="AB">AB</option>
+	<option value="AC">AC</option>
+	<option value="AD">AD</option>
+	<option value="AE">AE</option>
+	<option value="[">[</option>
+	<option value="]">]</option>
+	<option value="{">{</option>
+	<option value="}">}</option>
+
+</select>
+                                            </div>
+                                        </div>
+                                        <div class="ta-c form-p-m">
+                                            <input type="submit" name="QUERY_BTN1" value="查詢" onclick="return doQuery(&#39;1&#39;);" id="QUERY_BTN1" class="btn" ML="CB_查詢" />
+                                        </div>
+                                    </div>
+                                    <div id="tabs-2" class="tab-pane">
+                                        <div class="row">
+                                            <div class="col-xl-1 col-lg-2 col-md-3 col-form-label">
+                                                <span ml="PL_類別">類別</span>
+                                            </div>
+                                            <div class="col-xl-5 col-lg-4 col-md-9">
+                                                <span id="radioButtonClass" class="form-check"><input id="radioButtonClass_0" type="radio" name="radioButtonClass" value="0" checked="checked" /><label for="radioButtonClass_0">課號</label><input id="radioButtonClass_1" type="radio" name="radioButtonClass" value="1" /><label for="radioButtonClass_1">課名</label><input id="radioButtonClass_2" type="radio" name="radioButtonClass" value="2" /><label for="radioButtonClass_2">老師</label></span>
+                                            </div>
+                                            <div class="col-xl-1 col-lg-2 col-md-3 col-form-label">
+                                                <span ml="PL_關鍵字">關鍵字</span>
+                                            </div>
+                                            <div class="col-xl-5 col-lg-4 col-md-9">
+                                                <input name="Q_CH_LESSON" type="text" maxlength="64" id="Q_CH_LESSON" class="form-control" DD="X" CNAME="中文課名" IniFormSet="&#39;A&#39;" onkeyup="_fe().autoTab(event)" onkeypress="_fe().autoTab1(event)" />
+                                            </div>
+                                            <div class="col-xl-1 col-lg-2 col-md-3 col-form-label">
+                                                <span ml="PL_查詢模式">查詢模式</span>
+                                            </div>
+                                            <div class="col-xl-5 col-lg-4 col-md-9">
+                                                <span id="radioButtonQuery" class="form-check"><input id="radioButtonQuery_0" type="radio" name="radioButtonQuery" value="0" checked="checked" /><label for="radioButtonQuery_0">精準</label><input id="radioButtonQuery_1" type="radio" name="radioButtonQuery" value="1" /><label for="radioButtonQuery_1">模糊</label></span>
+                                            </div>
+                                        </div>
+                                        <div class="ta-c form-p-m">
+                                            <input type="submit" name="QUERY_BTN7" value="查詢" onclick="return doQuery(&#39;2&#39;);" id="QUERY_BTN7" class="btn" ML="CB_查詢" />
+                                        </div>
+                                    </div>
+                                    <div id="tabs-3" class="tab-pane">
+                                        <div class="row">
+                                            <div class="col-xl-1 col-lg-2 col-md-3 col-form-label">
+                                                <span ml="PL_開課系所">開課系所</span>
+                                            </div>
+                                            <div class="col-xl-5 col-lg-4 col-md-9">
+                                                <select name="Q_TCH_FACULTY_CODE" onchange="javascript:setTimeout(&#39;__doPostBack(\&#39;Q_TCH_FACULTY_CODE\&#39;,\&#39;\&#39;)&#39;, 0)" id="Q_TCH_FACULTY_CODE" class="form-select" DD="E" CNAME="教師系所代碼">
+	<option selected="selected" value="0720">0720-海運暨管理學院(碩)</option>
+	<option value="0730">0730-海運暨管理學院(博)</option>
+	<option value="0700">0700-海運暨管理學院</option>
+	<option value="072A">072A-商船學系智慧航運國際碩士班</option>
+	<option value="0701">0701-商船學系</option>
+	<option value="0721">0721-商船學系碩士班</option>
+	<option value="0703">0703-航運管理學系</option>
+	<option value="0723">0723-航運管理學系碩士班</option>
+	<option value="0733">0733-航運管理學系博士班</option>
+	<option value="0603">0603-運輸技術系航海組</option>
+	<option value="0608">0608-運輸科學系</option>
+	<option value="0609">0609-運輸與航海科學系運輸組</option>
+	<option value="0628">0628-運輸科學系碩士班</option>
+	<option value="060E">060E-運輸與航海科學系航海組</option>
+	<option value="0606">0606-輪機工程學系四年制</option>
+	<option value="060A">060A-輪機工程學系能源應用組</option>
+	<option value="060B">060B-輪機工程學系輪機動力組</option>
+	<option value="060D">060D-輪機工程學系動力工程組</option>
+	<option value="0626">0626-輪機工程學系碩士班</option>
+	<option value="0636">0636-輪機工程學系博士班</option>
+	<option value="0707">0707-海洋經營管理學士學位學程</option>
+	<option value="060F">060F-輪機工程學系</option>
+	<option value="0300">0300-生命科學院</option>
+	<option value="0320">0320-生命科學院(碩)</option>
+	<option value="0330">0330-生命科學院(博)</option>
+	<option value="0332">0332-食品科學系博士班</option>
+	<option value="0302">0302-食品科學系</option>
+	<option value="0309">0309-食品科學系食品科學組</option>
+	<option value="030A">030A-食品科學系生物科技組</option>
+	<option value="0322">0322-食品科學系碩士班</option>
+	<option value="1022">1022-食品安全與風險管理研究所</option>
+	<option value="0303">0303-水產養殖學系</option>
+	<option value="0323">0323-水產養殖學系碩士班</option>
+	<option value="0333">0333-水產養殖學系博士班</option>
+	<option value="032B">032B-生命科學暨生物科技學系碩士班</option>
+	<option value="033B">033B-生命科學暨生物科技學系博士班</option>
+	<option value="030B">030B-生命科學暨生物科技學系</option>
+	<option value="0324">0324-海洋生物研究所碩士班</option>
+	<option value="0334">0334-海洋生物研究所博士班</option>
+	<option value="1038">1038-海洋生物科技博士學位學程</option>
+	<option value="0308">0308-海洋生物科技學士學位學程</option>
+	<option value="0336">0336-生物科技研究所博士班</option>
+	<option value="032C">032C-海洋生物科技及環境生態永續國際碩士學位學程</option>
+	<option value="0830">0830-海洋科學與資源學院(博)</option>
+	<option value="0800">0800-海洋科學與資源學院</option>
+	<option value="0820">0820-海洋科學與資源學院(碩)</option>
+	<option value="0301">0301-環境生物與漁業科學學系</option>
+	<option value="0321">0321-環境生物與漁業科學學系碩士班</option>
+	<option value="0331">0331-環境生物與漁業科學學系博士班</option>
+	<option value="0801">0801-海洋環境資訊系</option>
+	<option value="0821">0821-海洋環境資訊系碩士班</option>
+	<option value="0831">0831-海洋環境資訊系博士班</option>
+	<option value="0826">0826-地球科學研究所碩士班</option>
+	<option value="0836">0836-地球科學研究所博士班</option>
+	<option value="0327">0327-海洋事務與資源管理研究所碩士班</option>
+	<option value="0823">0823-海洋環境與生態研究所碩士班</option>
+	<option value="1039">1039-海洋資源與環境變遷博士學位學程</option>
+	<option value="0530">0530-工學院(博)</option>
+	<option value="0500">0500-工學院</option>
+	<option value="0520">0520-工學院(碩)</option>
+	<option value="0702">0702-機械與機電工程學系</option>
+	<option value="0722">0722-機械與機電工程學系碩士班</option>
+	<option value="0732">0732-機械與機電工程學系博士班</option>
+	<option value="0531">0531-系統工程暨造船學系博士班</option>
+	<option value="0501">0501-系統工程暨造船學系</option>
+	<option value="0521">0521-系統工程暨造船學系碩士班</option>
+	<option value="052A">052A-系統工程暨造船學系應用聲學碩士班</option>
+	<option value="0532">0532-河海工程學系博士班</option>
+	<option value="0502">0502-河海工程學系</option>
+	<option value="0522">0522-河海工程學系碩士班</option>
+	<option value="0536">0536-海洋工程科技博士學位學程</option>
+	<option value="0506">0506-海洋工程科技學士學位學程</option>
+	<option value="0620">0620-電機資訊學院(碩)</option>
+	<option value="0600">0600-電機資訊學院</option>
+	<option value="0630">0630-電機資訊學院(博)</option>
+	<option value="0533">0533-電機工程學系博士班</option>
+	<option value="0503">0503-電機工程學系</option>
+	<option value="0523">0523-電機工程學系碩士班</option>
+	<option value="0537">0537-資訊工程學系博士班</option>
+	<option value="0507">0507-資訊工程學系</option>
+	<option value="0527">0527-資訊工程學系碩士班</option>
+	<option value="060C">060C-通訊與導航工程學系</option>
+	<option value="0627">0627-通訊與導航工程學系碩士班</option>
+	<option value="0808">0808-光電與材料科技學士學位學程</option>
+	<option value="0809">0809-光電與材料科技學系</option>
+	<option value="0829">0829-光電與材料科技學系碩士班</option>
+	<option value="0839">0839-光電與材料科技學系博士班</option>
+	<option value="1178">1178-應用人工智慧國際碩士學位學程</option>
+	<option value="0920">0920-人文社會科學院（碩）</option>
+	<option value="090E">090E-海洋文創設計產業學士學位學程</option>
+	<option value="0900">0900-人文社會科學院</option>
+	<option value="0325">0325-應用經濟研究所碩士班</option>
+	<option value="092A">092A-教育研究所碩士班</option>
+	<option value="092C">092C-海洋文化研究所碩士班</option>
+	<option value="092D">092D-應用英語研究所碩士班</option>
+	<option value="1000">1000-海洋法律與政策學院（學）</option>
+	<option value="1030">1030-海洋法律與政策學院（博）</option>
+	<option value="1020">1020-海洋法律與政策學院（碩）</option>
+	<option value="0724">0724-海洋法律研究所碩士班</option>
+	<option value="0734">0734-海洋法律研究所博士班</option>
+	<option value="0706">0706-海洋觀光管理學士學位學程</option>
+	<option value="1001">1001-海洋法政學士學位學程</option>
+	<option value="1024">1024-海洋政策碩士學位學程</option>
+	<option value="090K">090K-共同教育中心語文教育組</option>
+	<option value="090G">090G-共同教育中心</option>
+	<option value="090D">090D-大學部英語課程(原外語中心)</option>
+	<option value="090M">090M-共同教育中心博雅教育組</option>
+	<option value="090N">090N-華語中心</option>
+	<option value="092N">092N-華語中心（碩）</option>
+	<option value="0901">0901-通識教育中心</option>
+	<option value="0905">0905-師資培育中心</option>
+	<option value="090B">090B-外語教學研究中心</option>
+	<option value="093G">093G-共同教育中心(博)</option>
+	<option value="0902">0902-體育室</option>
+	<option value="0903">0903-軍訓室</option>
+	<option value="0904">0904-大學暑修班</option>
+	<option value="0906">0906-抵免課程</option>
+	<option value="0907">0907-校際選課</option>
+	<option value="0908">0908-國外校際(學)</option>
+	<option value="0924">0924-研究所暑修班</option>
+	<option value="0926">0926-抵免課程(碩)</option>
+	<option value="0927">0927-校際選課(碩)</option>
+	<option value="0928">0928-國外校際(碩)</option>
+	<option value="0936">0936-抵免課程(博)</option>
+	<option value="0937">0937-校際選課(博)</option>
+	<option value="0938">0938-國外校際(博)</option>
+	<option value="090S">090S-學務處</option>
+	<option value="040H">040H-輪機工程學系進修學士班</option>
+	<option value="040B">040B-資訊管理學系進修學士班</option>
+	<option value="040S">040S-航運管理學系進修學士班資訊管理組</option>
+	<option value="040G">040G-航運管理學系進修學士班物流管理組</option>
+	<option value="040D">040D-商船學系進修學士班</option>
+	<option value="0401">0401-航運管理學系進修學士班航運管理組</option>
+	<option value="0402">0402-食品科學系進修學士班</option>
+	<option value="040A">040A-商船學系學士後多元專長培力課程專班</option>
+	<option value="040Q">040Q-輪機工程學系學士後多元專長培力課程專班</option>
+	<option value="0408">0408-體育室(進)</option>
+	<option value="0409">0409-通識教育中心(進)</option>
+	<option value="040N">040N-外語教學研究中心(進)</option>
+	<option value="040P">040P-大學暑修班(進)</option>
+	<option value="040U">040U-校際選課(進)</option>
+	<option value="044J">044J-航運管理學系碩士在職專班企業管理組</option>
+	<option value="044Q">044Q-輪機工程學系碩士在職專班</option>
+	<option value="044Y">044Y-運輸科學系運輸與供應鏈管理碩士在職專班</option>
+	<option value="044A">044A-商船學系碩士在職專班</option>
+	<option value="044G">044G-航運管理學系國際物流管理碩士在職專班</option>
+	<option value="044I">044I-航運管理學系碩士在職專班航運管理組</option>
+	<option value="044X">044X-食品安全管理碩士在職學位學程</option>
+	<option value="0442">0442-食品科學系碩士在職專班</option>
+	<option value="044E">044E-海洋環境資訊系碩士在職專班</option>
+	<option value="044L">044L-永續發展碩士在職學位學程</option>
+	<option value="0447">0447-環境生物與漁業科學學系碩士在職專班</option>
+	<option value="0445">0445-河海工程學系碩士在職專班</option>
+	<option value="0443">0443-電機工程學系碩士在職專班</option>
+	<option value="044W">044W-資訊工程學系碩士在職專班</option>
+	<option value="044F">044F-教育研究所碩士在職專班</option>
+	<option value="0446">0446-海洋法律研究所碩士在職專班</option>
+	<option value="046A">046A-推廣教育-商船學系碩士學分班</option>
+	<option value="0461">0461-推廣教育-航運管理學系碩士學分班</option>
+	<option value="046Y">046Y-推廣教育-運輸碩士學分班</option>
+	<option value="0466">0466-推廣教育-海洋法律研究所碩士學分班</option>
+	<option value="046F">046F-推廣教育-教育研究所碩士學分班</option>
+	<option value="046Q">046Q-推廣教育-輪機工程學系碩士學分班</option>
+	<option value="0467">0467-推廣教育-海洋政策碩士學位學程法律碩士學分班</option>
+	<option value="0468">0468-推廣教育-海洋政策碩士學位學程法律碩士學分班</option>
+	<option value="0462">0462-推廣教育-食品科學碩士學分班</option>
+	<option value="046X">046X-推廣教育-食安所食品安全碩士學分班</option>
+	<option value="0465">0465-推廣教育-河海工程學系公共建設與管理碩士學分班</option>
+	<option value="0479">0479-共同科學士推廣教育學分班</option>
+	<option value="0476">0476-海洋商務法律20學士學分班</option>
+	<option value="0464">0464-推廣教育-造船系軌道工程碩士學分班</option>
+	<option value="0473">0473-推廣學分班</option>
+	<option value="040V">040V-學士後商船學士學位學程</option>
+	<option value="040C">040C-軍訓室(進)</option>
+	<option value="0911">0911-校際選課(體育)</option>
+	<option value="0912">0912-校際選課(外文)</option>
+	<option value="046B">046B-推廣教育-高階主管企業管理碩士學程學分班</option>
+	<option value="047R">047R-船舶基礎知識教育訓練</option>
+	<option value="9000">9000-未來學院</option>
+	<option value="0939">0939-校際選課（臺北聯合大學系統(博)）</option>
+	<option value="0060">0060-體育室</option>
+	<option value="0100">0100-行政單位</option>
+	<option value="0400">0400-進修推廣教育班</option>
+	<option value="0062">0062-體育室體育活動組</option>
+	<option value="0061">0061-體育室體育教學組</option>
+	<option value="0909">0909-校際選課（臺北聯合大學系統）</option>
+	<option value="047O">047O-推廣教育-海洋教育在職進修學分班</option>
+	<option value="0929">0929-校際選課（臺北聯合大學系統(碩)）</option>
+	<option value="0910">0910-校際選課(博雅)</option>
+
+</select>
+                                            </div>
+                                            <div class="col-xl-1 col-lg-2 col-md-3 col-form-label">
+                                                <span ml="PL_開課老師">開課老師</span>
+                                            </div>
+                                            <div class="col-xl-5 col-lg-4 col-md-9">
+                                                <select name="Q_LECTR_TCH_CH" id="Q_LECTR_TCH_CH" class="form-select" DD="X" CNAME="授課教師中文名稱">
+
+</select>
+                                            </div>
+                                        </div>
+                                        <div class="ta-c form-p-m">
+                                            <input type="submit" name="QUERY_BTN3" value="查詢" onclick="return doQuery(&#39;3&#39;);" id="QUERY_BTN3" class="btn" ML="CB_查詢" />
+                                            <input type="submit" name="QUERY_BTN4" value="課程清單" onclick="return doQuery(&#39;4&#39;);" id="QUERY_BTN4" class="btn" ML="CB_課程清單" />
+                                            <input name="PRINT_ALL_BTN1" type="button" id="PRINT_ALL_BTN1" class="btn btn-print" ml="CB_列印教師課表" value="列印教師課表" onclick="doPrint1(&quot;1&quot;)" />
+                                        </div>
+                                    </div>
+                                    <div id="tabs-4" class="tab-pane">
+                                        <div class="row">
+                                            <div class="col-xl-1 col-lg-2 col-md-3 col-form-label">
+                                                <span ml="PL_星期">星期</span>
+                                            </div>
+                                            <div class="col-xl-5 col-lg-4 col-md-9">
+                                                <select name="Q_WEEK" id="Q_WEEK" class="form-select" SKIP="Y" DD="X" CNAME="星期">
+	<option selected="selected" value="1">星期一</option>
+	<option value="2">星期二</option>
+	<option value="3">星期三</option>
+	<option value="4">星期四</option>
+	<option value="5">星期五</option>
+	<option value="6">星期六</option>
+	<option value="7">星期日</option>
+
+</select>
+                                            </div>
+                                            <div class="col-xl-1 col-lg-2 col-md-3 col-form-label">
+                                                <span ml="PL_節次">節次</span>
+                                            </div>
+                                            <div class="col-xl-5 col-lg-4 col-md-9">
+                                                <select name="Q_CLASS" id="Q_CLASS" class="form-select" SKIP="Y">
+	<option selected="selected" value="00">00</option>
+	<option value="01">01</option>
+	<option value="02">02</option>
+	<option value="03">03</option>
+	<option value="04">04</option>
+	<option value="05">05</option>
+	<option value="06">06</option>
+	<option value="07">07</option>
+	<option value="08">08</option>
+	<option value="09">09</option>
+	<option value="10">10</option>
+	<option value="11">11</option>
+	<option value="12">12</option>
+	<option value="13">13</option>
+	<option value="14">14</option>
+	<option value="15">15</option>
+	<option value="16">16</option>
+
+</select>
+                                            </div>
+                                        </div>
+                                        <div class="ta-c form-p-m">
+                                            <input type="submit" name="QUERY_BTN5" value="查詢" onclick="return doQuery(&#39;5&#39;);" id="QUERY_BTN5" class="btn" ML="CB_查詢" />
+                                        </div>
+                                    </div>
+                                    <div id="tabs-5" class="tab-pane">
+                                        <div class="row">
+                                            <div class="col-xl-1 col-lg-2 col-md-3 col-form-label">
+                                                <span ml="PL_樓館名稱">樓館名稱</span>
+                                            </div>
+                                            <div class="col-xl-5 col-lg-4 col-md-9">
+                                                <select name="Q_CLSSRM_BUILD" onchange="javascript:setTimeout(&#39;__doPostBack(\&#39;Q_CLSSRM_BUILD\&#39;,\&#39;\&#39;)&#39;, 0)" id="Q_CLSSRM_BUILD" class="form-select" DD="X" CNAME="大樓">
+	<option value="人文大樓">人文大樓</option>
+	<option selected="selected" value="商船大樓">商船大樓</option>
+	<option value="圖書館">圖書館</option>
+	<option value="學生活動中心">學生活動中心</option>
+	<option value="工學院大樓">工學院大樓</option>
+	<option value="工學院視聽室">工學院視聽室</option>
+	<option value="技術大樓">技術大樓</option>
+	<option value="木蘭海洋海事教育大樓">木蘭海洋海事教育大樓</option>
+	<option value="機械A館">機械A館</option>
+	<option value="機械B館">機械B館</option>
+	<option value="水生動物實驗中心">水生動物實驗中心</option>
+	<option value="沛華大樓">沛華大樓</option>
+	<option value="河工一館">河工一館</option>
+	<option value="河工二館">河工二館</option>
+	<option value="海事大樓">海事大樓</option>
+	<option value="海洋夢想基地(停用)">海洋夢想基地(停用)</option>
+	<option value="海洋系館">海洋系館</option>
+	<option value="海空大樓">海空大樓</option>
+	<option value="環漁系館">環漁系館</option>
+	<option value="生命科學院館">生命科學院館</option>
+	<option value="第一餐廳">第一餐廳</option>
+	<option value="綜合一館">綜合一館</option>
+	<option value="綜合三館">綜合三館</option>
+	<option value="綜合二館">綜合二館</option>
+	<option value="綜合研究中心">綜合研究中心</option>
+	<option value="育樂館">育樂館</option>
+	<option value="航管大樓">航管大樓</option>
+	<option value="蘇澳圖書館">蘇澳圖書館</option>
+	<option value="虛擬">虛擬</option>
+	<option value="行政大樓">行政大樓</option>
+	<option value="資工系館">資工系館</option>
+	<option value="造船系館">造船系館</option>
+	<option value="電機一館">電機一館</option>
+	<option value="電機二館">電機二館</option>
+	<option value="電算中心三樓">電算中心三樓</option>
+	<option value="電算中心四樓">電算中心四樓</option>
+	<option value="電資暨綜合教學大樓">電資暨綜合教學大樓</option>
+	<option value="食品科學館">食品科學館</option>
+	<option value="食安所館">食安所館</option>
+	<option value="食科工程館">食科工程館</option>
+	<option value="馬祖校區教學大樓">馬祖校區教學大樓</option>
+	<option value="體育場地">體育場地</option>
+	<option value="體育館">體育館</option>
+
+</select>
+                                            </div>
+                                            <div class="col-xl-1 col-lg-2 col-md-3 col-form-label">
+                                                <span ml="PL_教室名稱">教室名稱</span>
+                                            </div>
+                                            <div class="col-xl-5 col-lg-4 col-md-9">
+                                                <select name="Q_CLSSRM_ID" id="Q_CLSSRM_ID" class="form-select" DD="X" CNAME="教室代號">
+	<option value="202">202</option>
+	<option value="NAV101">NAV101</option>
+	<option value="NAV103">NAV103</option>
+	<option value="NAV105">NAV105</option>
+	<option value="NAV106">NAV106</option>
+	<option value="NAV107">NAV107</option>
+	<option selected="selected" value="NAV201">NAV201</option>
+	<option value="NAV202">NAV202</option>
+	<option value="NAV203">NAV203</option>
+	<option value="NAV204">NAV204</option>
+	<option value="NAV205">NAV205</option>
+	<option value="NAV206">NAV206</option>
+	<option value="NAV207">NAV207</option>
+	<option value="NAV209">NAV209</option>
+	<option value="NAV210">NAV210</option>
+	<option value="NAV302">NAV302</option>
+	<option value="NAV303">NAV303</option>
+	<option value="NAV304">NAV304</option>
+	<option value="NAV307">NAV307</option>
+	<option value="NAV308">NAV308</option>
+	<option value="NAV310">NAV310</option>
+	<option value="NAV402">NAV402</option>
+	<option value="NAV407">NAV407</option>
+	<option value="NAV408">NAV408</option>
+	<option value="NAV502">NAV502</option>
+	<option value="NAV505">NAV505</option>
+	<option value="NAV506">NAV506</option>
+	<option value="NAV602">NAV602</option>
+	<option value="NAV603">NAV603</option>
+	<option value="NAV604">NAV604</option>
+	<option value="NAV701">NAV701</option>
+	<option value="NAV702">NAV702</option>
+	<option value="NAV703">NAV703</option>
+	<option value="NAV704">NAV704</option>
+	<option value="NAV706">NAV706</option>
+	<option value="nav307">nav307</option>
+
+</select>
+                                            </div>
+                                        </div>
+                                        <div class="ta-c form-p-m">
+                                            <input type="submit" name="QUERY_BTN6" value="查詢" onclick="return doQuery(&#39;6&#39;);" id="QUERY_BTN6" class="btn" ML="CB_查詢" />
+                                        </div>
+                                    </div>
+                                    <div id="tabs-6" class="tab-pane">
+                                        <div class="ta-c form-p-m">
+                                            <input type="submit" name="QUERY_BTN8" value="查詢" onclick="return doQuery(&#39;7&#39;);" id="QUERY_BTN8" class="btn" ML="CB_查詢" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 查詢畫面結束 -->
+                    <!-- 查詢結果畫面起始 -->
+                    <div class="shadow-frame mb-4">
+                        <div class="card-header">
+                            <span ml="CL_查詢結果">查詢結果</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <!-- 分頁字串起始 -->
+                                <div class="col-md-12 page-no-section">
+                                    
+                                </div>
+                                <!-- 分頁字串結束 -->
+                            </div>
+                            
+                            <div class="row">
+                                <!-- 查詢結果功能畫面起始 -->
+                                <!-- GridView要用這三層div包住 -->
+                                <div class="col-md-12">
+                                    <div class="table-responsive">
+                                        <div class="dataTables_wrapper">
+                                            <!-- ※DataGrid放在這裡，"編""詳""刪"控制項目要加ItemStyle-CssClass="actionBtn" -->
+                                            <!-- ※HeaderStyle的CssClass改成mobileHide -->
+                                            <!-- ※TemplateField控制項目若是checkbox，在input元素內要加class="data-check" -->
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- 查詢結果功能畫面結束 -->
+                            <div class="row">
+                                <!-- 下方分頁字串起始 -->
+                                <div class="col-md-12 page-no-section">
+                                    
+                                </div>
+                                <!-- 下方分頁字串結束 -->
+                            </div>
+                            <div class="row">
+                                <!-- 查詢結果功能畫面起始 -->
+                                <!-- GridView要用這三層div包住 -->
+                                <div class="col-md-12">
+                                    <div class="table-responsive table-revert">
+                                        <div class="dataTables_wrapper">
+                                            <center>商船大樓 NAV201教室 1132 學期課表</center><table id='table2' width='100%' cellpadding='2' cellspacing='0' summary='排版用表格'><tr align='center'><td>&nbsp;</td><td>星期一</td><td>星期二</td><td>星期三</td><td>星期四</td><td>星期五</td><td>星期六</td><td>星期日</td></tr><tr align='center'><td>第0節<br/>06:20~08:10</td><td>&nbsp;</td></td><td>&nbsp;</td></td><td>&nbsp;</td></td><td>&nbsp;</td></td><td>&nbsp;</td></td><td>&nbsp;</td></td><td>&nbsp;</td></tr><tr align='center'><td>第一節<br/>08:20~09:10</td><td>&nbsp;</td></td><td>&nbsp;</td></td><td>&nbsp;</td></td><td>&nbsp;</td></td><td>&nbsp;</td></td><td><p><a href='javascript:fn_open("134788077","1");'>天文航海<br>E4A01VCN<br>商船學系學士後多元專長培力課程專班</a></p></td></td><td>&nbsp;</td></tr><tr align='center'><td>第二節<br/>09:20~10:10</td><td>&nbsp;</td></td><td>&nbsp;</td></td><td>&nbsp;</td></td><td>&nbsp;</td></td><td>&nbsp;</td></td><td><p><a href='javascript:fn_open("134788077","1");'>天文航海<br>E4A01VCN<br>商船學系學士後多元專長培力課程專班</a></p></td></td><td>&nbsp;</td></tr><tr align='center'><td>第三節<br/>10:20~11:10</td><td><p><a href='javascript:fn_open("134784507","1");'>甲板機械與操舵系統<br>B71021DT<br>商船學系</a></p></td></td><td><p><a href='javascript:fn_open("135190968","1");'>地文航海<br>B7121547<br>商船學系</a></p></td></td><td><p><a href='javascript:fn_open("134773567","1");'>人員求生技能<br>B710102A<br>商船學系</a></p></td></td><td>&nbsp;</td></td><td>&nbsp;</td></td><td><p><a href='javascript:fn_open("134788077","1");'>天文航海<br>E4A01VCN<br>商船學系學士後多元專長培力課程專班</a></p></td></td><td>&nbsp;</td></tr><tr align='center'><td>第四節<br/>11:15~12:05</td><td><p><a href='javascript:fn_open("134784507","1");'>甲板機械與操舵系統<br>B71021DT<br>商船學系</a></p></td></td><td><p><a href='javascript:fn_open("135190968","1");'>地文航海<br>B7121547<br>商船學系</a></p></td></td><td><p><a href='javascript:fn_open("134773567","1");'>人員求生技能<br>B710102A<br>商船學系</a></p></td></td><td>&nbsp;</td></td><td>&nbsp;</td></td><td><p><a href='javascript:fn_open("134788077","1");'>天文航海<br>E4A01VCN<br>商船學系學士後多元專長培力課程專班</a></p></td></td><td>&nbsp;</td></tr><tr align='center'><td>第五節<br/>12:10~13:00</td><td>&nbsp;</td></td><td>&nbsp;</td></td><td>&nbsp;</td></td><td>&nbsp;</td></td><td>&nbsp;</td></td><td><p><a href='javascript:fn_open("134775136","1");'>學術研究倫理<br>M7101PPP<br>商船學系碩士班</a></p></td></td><td>&nbsp;</td></tr><tr align='center'><td>第六節<br/>13:10~14:00</td><td>&nbsp;</td></td><td>&nbsp;</td></td><td><p><a href='javascript:fn_open("134773878","1");'>人員求生技能<br>B710102A<br>商船學系</a></p></td></td><td>&nbsp;</td></td><td>&nbsp;</td></td><td>&nbsp;</td></td><td>&nbsp;</td></tr><tr align='center'><td>第七節<br/>14:10~15:00</td><td>&nbsp;</td></td><td>&nbsp;</td></td><td><p><a href='javascript:fn_open("134773878","1");'>人員求生技能<br>B710102A<br>商船學系</a></p></td></td><td>&nbsp;</td></td><td>&nbsp;</td></td><td>&nbsp;</td></td><td>&nbsp;</td></tr><tr align='center'><td>第八節<br/>15:10~16:00</td><td>&nbsp;</td></td><td><p><a href='javascript:fn_open("135190970","1");'>地文航海<br>B7121547<br>商船學系</a></p></td></td><td>&nbsp;</td></td><td>&nbsp;</td></td><td>&nbsp;</td></td><td>&nbsp;</td></td><td>&nbsp;</td></tr><tr align='center'><td>第九節<br/>16:05~16:55</td><td>&nbsp;</td></td><td><p><a href='javascript:fn_open("135190970","1");'>地文航海<br>B7121547<br>商船學系</a></p></td></td><td>&nbsp;</td></td><td>&nbsp;</td></td><td>&nbsp;</td></td><td>&nbsp;</td></td><td>&nbsp;</td></tr><tr align='center'><td>第十節<br/>17:30~18:20</td><td>&nbsp;</td></td><td>&nbsp;</td></td><td>&nbsp;</td></td><td>&nbsp;</td></td><td>&nbsp;</td></td><td>&nbsp;</td></td><td>&nbsp;</td></tr><tr align='center'><td>第十一節<br/>18:30~19:20</td><td>&nbsp;</td></td><td>&nbsp;</td></td><td>&nbsp;</td></td><td>&nbsp;</td></td><td>&nbsp;</td></td><td>&nbsp;</td></td><td>&nbsp;</td></tr><tr align='center'><td>第十二節<br/>19:25~20:15</td><td>&nbsp;</td></td><td>&nbsp;</td></td><td>&nbsp;</td></td><td>&nbsp;</td></td><td>&nbsp;</td></td><td>&nbsp;</td></td><td>&nbsp;</td></tr><tr align='center'><td>第十三節<br/>20:20~21:10</td><td>&nbsp;</td></td><td>&nbsp;</td></td><td>&nbsp;</td></td><td>&nbsp;</td></td><td>&nbsp;</td></td><td>&nbsp;</td></td><td>&nbsp;</td></tr><tr align='center'><td>第十四節<br/>21:15~22:05</td><td>&nbsp;</td></td><td>&nbsp;</td></td><td>&nbsp;</td></td><td>&nbsp;</td></td><td>&nbsp;</td></td><td>&nbsp;</td></td><td>&nbsp;</td></tr></table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 查詢結果畫面結束 -->
+                    <a id="ReQuery" href="javascript:__doPostBack(&#39;ReQuery&#39;,&#39;&#39;)"></a>
+                |0|hiddenField|__EVENTTARGET||0|hiddenField|__EVENTARGUMENT||0|hiddenField|__LASTFOCUS||31196|hiddenField|__VIEWSTATE|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|8|hiddenField|__VIEWSTATEGENERATOR|88AE5443|0|hiddenField|__VIEWSTATEENCRYPTED||9648|hiddenField|__EVENTVALIDATION|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|0|asyncPostBackControlIDs|||0|postBackControlIDs|||11|updatePanelIDs||tAjaxPanel,|0|childUpdatePanelIDs|||10|panelsToRefreshIDs||AjaxPanel,|2|asyncPostBackTimeout||90|17|formAction||./TKE2211_01.aspx|14|pageTitle||TKE2211_課程課表查詢|508|scriptStartupBlock|ScriptContentNoTags|var columnNameAry1 = [];var columnCodeAry1 = [];var columnIndexAry1 = [];var nonCheckQry1 = [];var recordName1 = 'TKE2211_01';var readOnlyColumn = ',,';Message.hideProcess();;try{$(_d()).ready(iniGridClickColor);$(_d()).ready(SortTable.sortables_init);}catch(ex){};try{setButtonEvent();reSize();}catch(ex){};try{switchLabel();}catch(ex){};var	proj	=	'海洋大學';try{$(_d()).ready(function(){try{gridOuterHTML=_('DataGrid').outerHTML;setColumnHide()}catch(ex){}})}catch(ex){};try{Form.iniFormColor();}catch(ex){};;|
