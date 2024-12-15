@@ -46,7 +46,8 @@ async function handleSearch(req, res) {
                                         '開課單位': course['開課單位'] && course['開課單位'].trim().toLowerCase(),
                                         '星期': course['星期'] && course['星期'].trim().toLowerCase(),
                                         '節數': course['節數'] && course['節數'].trim().toLowerCase(),
-                                        '授課老師': course['授課老師'] && course['授課老師'].trim().toLowerCase()
+                                        '授課老師': course['授課老師'] && course['授課老師'].trim().toLowerCase(),
+                                        '教室': course['教室'] && course['教室'].trim().toLowerCase()
                                     };
 
                                     // 根据查询条件包含匹配字段

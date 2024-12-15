@@ -20,18 +20,18 @@
             height: 20px;
             border-radius: 50%;
             background-color: grey; /* 預設為灰色 */
-            z-index: 9999; /* 确保圆形显示在最上层 */
+            z-index: 9999;
         }
         
         /* 當用戶已登錄時，顯示綠色 */
         .logged-in {
-            background-color: green !important; /* 使用 !important 确保覆盖其他样式 */
+            background-color: green !important;
         }
     </style>
+    <link rel="stylesheet" href="/css/special.css">
 </head>
 <body>
     <main class="container">
-        <!-- 登入狀態圓形 -->
         <div id="loginStatus"></div>
 
         <!-- 折疊工具列 -->
@@ -41,7 +41,6 @@
                 <a href="/login" class="btn">登入頁面</a>
                 <a href="/register" class="btn">註冊頁面</a>
                 <a href="/docs/網路程式設計專題提案.pdf" class="btn" target="_blank">說明文件</a>
-                <!-- 登出按鈕 -->
                 <a href="#" class="btn" id="logoutBtn" style="display: none;">登出</a>
             </div>
         </div>
@@ -55,6 +54,7 @@
                     <input type="text" id="courseCode" placeholder="課程代碼">
                     <input type="text" id="courseTime" placeholder="課程時間">
                     <input type="text" id="department" placeholder="學系">
+                    <input type="text" id="location" placeholder="教室">
                 </div>
                 <button type="submit" id="searchButton" class="btn">查詢</button>
             </form>
@@ -74,11 +74,10 @@
                             <th>課程名稱</th>
                             <th>課號</th>
                             <th>開課單位</th>
+                            <th>教室位置</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <!-- 查询结果会插入在这里 -->
-                    </tbody>
+                    <tbody></tbody>
                 </table>
             </div>
         </section>
@@ -91,7 +90,6 @@
             </div>
         </div>
 
-        <!-- 顯示地圖的按鈕 -->
         <section class="map-btn-container">
             <button id="showMapBtn" class="btn">查看地圖</button>
         </section>
@@ -101,28 +99,21 @@
     <script src="/js/map.js"></script>
     <script src="/js/script.js"></script>
     <script>
-        // 初始化登录状态
         const loggedIn = localStorage.getItem('loggedIn') === 'true';
-        console.log('Logged In Status:', loggedIn);
-
-        // 依照登录状态修改左上角圆圈颜色
         const loginStatusElement = document.getElementById('loginStatus');
         const logoutBtn = document.getElementById('logoutBtn');
         
         if (loggedIn) {
-            console.log('User is logged in');
-            loginStatusElement.classList.add('logged-in');  // 添加类以更改颜色
-            logoutBtn.style.display = 'block';  // 显示登出按钮
+            loginStatusElement.classList.add('logged-in');
+            logoutBtn.style.display = 'block';
         } else {
-            console.log('User is not logged in');
-            loginStatusElement.classList.remove('logged-in');  // 移除登录状态样式
-            logoutBtn.style.display = 'none';  // 隐藏登出按钮
+            loginStatusElement.classList.remove('logged-in');
+            logoutBtn.style.display = 'none';
         }
 
-        // 登出功能
         logoutBtn.addEventListener('click', function() {
-            localStorage.removeItem('loggedIn');  // 清除登录状态
-            window.location.reload();  // 刷新页面，更新状态
+            localStorage.removeItem('loggedIn');
+            window.location.reload();
         });
     </script>
 </body>

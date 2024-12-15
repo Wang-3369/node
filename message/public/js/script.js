@@ -4,13 +4,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 获取所有查询输入框
     const inputs = {
-        teacher: document.getElementById('teacher'),
-        courseName: document.getElementById('courseName'),
-        courseCode: document.getElementById('courseCode'),
-        courseTime: document.getElementById('courseTime'),
-        department: document.getElementById('department')
+        '授課老師': document.getElementById('teacher'),
+        '課程名稱': document.getElementById('courseName'),
+        '課號': document.getElementById('courseCode'),
+        '節數': document.getElementById('courseTime'),
+        '開課單位': document.getElementById('department'),
+        '教室': document.getElementById('location')
     };
-
     // 确保按钮存在
     if (searchButton) {
         searchButton.addEventListener('click', function(event) {
@@ -32,7 +32,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 alert("请输入至少一个搜索关键词");
                 return;
             }
-
             // 发起 fetch 请求到服务器
             fetch('/search', {
                 method: 'POST',
@@ -47,9 +46,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 tbody.innerHTML = "";  // 清空当前的搜索结果
 
                 if (data.message) {
-                    tbody.innerHTML = "<tr><td colspan='5'>" + data.message + "</td></tr>";
+                    tbody.innerHTML = "<tr><td colspan='6'>" + data.message + "</td></tr>";
                 } else if (data.length === 0) {
-                    tbody.innerHTML = "<tr><td colspan='5'>没有找到相关课程</td></tr>";
+                    tbody.innerHTML = "<tr><td colspan='6'>没有找到相关课程</td></tr>";
                 } else {
                     data.forEach(item => {
                         const row = document.createElement('tr');
@@ -59,6 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <td>${item['課程名稱']}</td>
                             <td>${item['課號']}</td>
                             <td>${item['開課單位']}</td>
+                            <td>${item['教室']}</td>
                         `;
                         tbody.appendChild(row);
                     });

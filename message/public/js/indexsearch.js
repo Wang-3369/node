@@ -7,12 +7,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // 收集表單中的所有查詢條件
         const query = {
-            teacher: document.getElementById('teacher').value.trim(),
-            courseName: document.getElementById('courseName').value.trim(),
-            courseCode: document.getElementById('courseCode').value.trim(),
-            courseTime: document.getElementById('courseTime').value.trim(),
-            department: document.getElementById('department').value.trim()
+            '授課老師': document.getElementById('teacher').value.trim(),
+            '課程名稱': document.getElementById('courseName').value.trim(),
+            '課號': document.getElementById('courseCode').value.trim(),
+            '節數': document.getElementById('courseTime').value.trim(),
+            '開課單位': document.getElementById('department').value.trim(),
+            '教室': document.getElementById('location').value.trim()
         };
+        
 
         // 去除空值條件
         const validQuery = Object.fromEntries(Object.entries(query).filter(([key, value]) => value !== ''));
@@ -36,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
             resultsTable.innerHTML = '';
 
             if (data.length === 0) {
-                resultsTable.innerHTML = '<tr><td colspan="5">沒有找到相關課程</td></tr>';
+                resultsTable.innerHTML = '<tr><td colspan="6">沒有找到相關課程</td></tr>';
             } else {
                 // 展示搜索結果
                 data.forEach(item => {
@@ -47,6 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <td>${item['課程名稱']}</td>
                         <td>${item['課號']}</td>
                         <td>${item['開課單位']}</td>
+                        <td>${item['教室']}</td>
                     `;
                     resultsTable.appendChild(row);
                 });
