@@ -9,22 +9,3 @@ toggleMenuBtn.onclick = function() {
         collapsibleMenu.style.display = "block";
     }
 }
-
-// 地圖彈窗邏輯
-const modal = document.getElementById("mapModal");
-const showMapBtn = document.getElementById("showMapBtn");
-const closeMapBtn = document.getElementById("closeMapBtn");
-
-showMapBtn.onclick = function() {
-    modal.style.display = "flex";
-}
-
-closeMapBtn.onclick = function() {
-    modal.style.display = "none";
-}
-
-window.onclick = function(event) {
-    if (event.target === modal) {
-        modal.style.display = "none";
-    }
-}

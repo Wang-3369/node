@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="/css/layout.css">
     <link rel="stylesheet" href="/css/form.css">
     <link rel="stylesheet" href="/css/button.css">
+    <style>
+        a{
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
     <main class="container">
@@ -26,21 +31,45 @@
                     <tr>
                         <td><a href="/register" class="btn">註冊</a></td>
                     </tr>
+                    <tr>
+                        <td><a href="/" class="btn">訪客登入</a></td>
+                    </tr>
                 </table>
             </form>
         </section>
     </main>
 
     <script>
-        // 登入表單提交後，假設後端返回成功
+        // 捕獲表單提交事件，使用 AJAX 處理登入
         document.getElementById('loginForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            // 模擬成功登入
-            localStorage.setItem('loggedIn', 'true');  // 設置登入狀態
+            event.preventDefault(); // 防止表單默認提交，改用 AJAX 方式
 
-            // 成功後跳轉到首頁
-            window.location.href = '/';
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // 發送登入請求
+            fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, password })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // 登入成功，跳轉到首頁
+                    localStorage.setItem('loggedIn', 'true');  // 登入成功後設置 localStorage
+                    window.location.href = '/';
+                } else {
+                    // 顯示錯誤訊息
+                    window.alert(data.message); // 顯示登入錯誤訊息
+                }
+            })
+            .catch(error => {
+                console.error('登入失敗:', error);
+                window.alert("登入失敗，請稍後再試");
+            });
         });
     </script>
 </body>
